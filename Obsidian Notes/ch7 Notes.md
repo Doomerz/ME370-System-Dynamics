@@ -27,6 +27,7 @@ AM = M(LAM) -> LAM = M^-1 \*A \*M
 therefore A' = LAM (diagonal, therefore diagonalized the state-space model)
 x(d/dt)' = LAM\*x' +M^-1 \*B\*u
 
+state transition matrix:
 Phi(t) = e^(A\*t)
 Phi'(t) = e^(LAM\*t) = diagonal of eigenvalues where (i,i) = e^(lam_i\*t)
 
