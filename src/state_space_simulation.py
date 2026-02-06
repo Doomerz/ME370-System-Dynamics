@@ -1,6 +1,10 @@
 import numpy as np
 import control
 import matplotlib.pyplot as plt
+from numpy import linalg as la
+import sympy as sp
+#from IPython.display import display, Markdown, Latex
+#np.set_precision(3)
 
 # Define the state-space representation of the system
 A = np.array([
