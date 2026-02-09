@@ -7,12 +7,12 @@ an overhead suspension system that is subjected to vibration from the support st
 """
 import numpy as np
 
-b1 = 0
+b1 = 0.
 m1 = 0.1
-m2 = 1
-k1 = 9
+m2 = 1.
+k1 = 9.
 k2 = k1
-b2 = 20
+b2 = 20.
 
 A1 = np.array([
     [-b1/m1, -1/m1, b1/m1,0],
@@ -38,4 +38,4 @@ print("Eigenvalues for b = 0:\n", evals1)
 print("Eigenvectors for b = 0:\n", evecs1)
 print("Eigenvalues for b = 20:\n", evals2)
 print("Eigenvectors for b = 20:\n", evecs2)
-print("In evaluating the results I see that the frequencies of vibration are far more common in the undampened system and damping seems to reduce this. I am not sure I fully understand this yet, but this is interesting")
+print("frequencies for b = 0:\n", evals1.imag, "radians per second for each pair (just take the positive)")
