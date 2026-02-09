@@ -28,7 +28,7 @@ t_end = 4.
 pts = 101
 
 evals, evecs = np.linalg.eig(A)
-evecs = evecs[:, np.argsort(evals)][::-1]
+evecs = evecs[:, np.argsort(evals)[::-1]]
 evals = np.sort(evals)[::-1]
 emat = np.diag(evals)
 print("Eigenvalue matrix:\n", emat)
@@ -39,7 +39,7 @@ Phi = evecs @ Phi_prime @ np.linalg.inv(evecs)
 print("Phi_prime (diagonalized state transition matrix):\n", Phi_prime)
 print("Phi (state transition matrix):\n", Phi)
 x_fr = Phi @ x0
-print("Free response for initial condition x(0) = [[0],[0],[1]]:\n", x_fr)
+print("state Free response for initial condition x(0) = [[0],[0],[1]]:\n", x_fr)
 if pts < 2:
     raise ValueError("pts must be at least 2 to create a time vector")
 time = np.linspace(t_ini,t_end,pts)

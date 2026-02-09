@@ -30,6 +30,8 @@ X(0) = [
 ]
 """
 import numpy as np
+import sympy as sp
+from pprint import pprint
 
 def stability(eigenvalues):
     if any(v > 0 for v in eigenvalues):
@@ -55,7 +57,25 @@ D = np.array([
 ])
 
 evals, evecs = np.linalg.eig(A)
-evecs = evecs[:, np.argsort(evals)][::-1] # sort the eigenvectors according to the sorted eigenvalues and reverse
+evecs = evecs[:, np.argsort(evals)[::-1]] # sort the eigenvectors according to the sorted eigenvalues and reverse
+evals = np.sort(evals)[::-1] # sort ascending and reverse
+print("Eigenvalue matrix:\n", np.diag(evals))
+print(stability(evals))
+print("Eigenvectors/modal matrix:\n", evecs)
+t = sp.symbols('t' ,real=True, nonnegative=True)
+Phi_prime = sp.exp(sp.Matrix(np.diag(evals)) * t)
+print("Phi_prime (diagonalized state transition matrix):\n", Phi_prime)
+Phi = evecs * Phi_prime * np.linalg.inv(evecs)
+print("Phi (state transition matrix):\n", Phi)
+X0 = np.array([[1], [0]])
+x_fr = Phi * X0
+print("state free response for initial condition X(0) = [[1], [0]]:\n", x_fr)
+y_fr = C * x_fr
+print("output free response for initial condition X(0) = [[1], [0]]:\n", y_fr)
+pprint(y_fr)
+"""
+evals, evecs = np.linalg.eig(A)
+evecs = evecs[:, np.argsort(evals)[::-1]] # sort the eigenvectors according to the sorted eigenvalues and reverse
 evals = np.sort(evals)[::-1] # sort ascending and reverse
 emat = np.zeros((len(evals), len(evals)), dtype=complex)
 for i in range(len(evals)):
@@ -71,6 +91,7 @@ print("Phi (state transition matrix):\n", Phi)
 X0 = np.array([[1], [0]])
 x_fr = evecs @ Phi_prime @ np.linalg.inv(evecs) @ X0
 print("Output free response for initial condition X(0) = [[1], [0]]:\n", x_fr)
+"""
 """
 Eigenvalue matrix emat (or LAMBDA) is:
 asymptotically stabe if all eigen values have negative real parts

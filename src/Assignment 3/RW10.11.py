@@ -29,8 +29,8 @@ A2 = np.array([
 
 evals1, evecs1 = np.linalg.eig(A1)
 evals2, evecs2 = np.linalg.eig(A2)
-evecs1 = evecs1[:, np.argsort(evals1)][::-1]
-evecs2 = evecs2[:, np.argsort(evals2)][::-1]
+evecs1 = evecs1[:, np.argsort(evals1)[::-1]]
+evecs2 = evecs2[:, np.argsort(evals2)[::-1]]
 evals1 = np.sort(evals1)[::-1]
 evals2 = np.sort(evals2)[::-1]
 

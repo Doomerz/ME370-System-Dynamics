@@ -29,7 +29,7 @@ D = np.array([
 ])
 x0 = np.array([[5],[15],[2]])
 evals, evecs = np.linalg.eig(A)
-evecs = evecs[:, np.argsort(evals)][::-1]
+evecs = evecs[:, np.argsort(evals)[::-1]]
 evals = np.sort(evals)[::-1]
 Phi_prime = np.diag(np.exp(evals))
 Phi = evecs @ Phi_prime @ np.linalg.inv(evecs)
