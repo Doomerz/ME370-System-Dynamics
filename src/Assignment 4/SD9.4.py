@@ -1,0 +1,41 @@
+#f(t) = at for -T/2 < t <= T/2
+# a=5
+# T =1
+# plot f along with partial sum of the fourier series synthesis, the first 50 nonzero components over -T<=t<=T
+# a_0 = 2/T int(y(t)) = should be 0 over the period #2(a*t**2/2 + c)/T, c = 0 therefore: a_0 = a*t**2/T
+# a_n = 0 since the function is odd over the period
+# b_n = (2/T)*(a*(1/w**2*sin(wt)-t/w*cos(wt)))
+import numpy as np
+import matplotlib.pyplot as plt
+
+#consts
+a = 5
+T = 1
+pts = 100
+partials = 50
+time = np.linspace(-T,T,pts)
+#plot prep
+fig, ax = plt.subplots()
+
+#calc
+w = 1
+count = 0
+y = np.empty(((len(time),partials)))
+res = np.empty(len(time))
+while True:
+    if count >= partials:
+        break
+    for i, t in enumerate(time):
+        y[i,count] = (2/T)*(a*(1/w**2*np.sin(w*t)-t/w*np.cos(w*t)))*np.sin(w*t)
+    count += 1
+    w += 2
+for i, x in enumerate(y):
+    res[i] = np.sum(x[1])
+ax.plot(time, res, label="sum of first 50 nonzero components")
+for i in range(partials):
+    ax.plot(time, y[:,i], label=f"partial {i*2+1}")
+ax.set_xlabel("Time (s)")
+ax.set_ylabel("Output")
+ax.legend()
+plt.grid()
+plt.show()
